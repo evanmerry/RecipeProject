@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+ <a href="{% url 'recipe_create' %}">+ New Recipe</a>
+ <div class="nav-right">
+ </div>
+    {% for recipes in recipe %}
+        <div class="post-entry">
+            <h2><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.title }}</a></h2>
+            {% if recipe.user and recipe.user.username %}
+                <p>By: {{ recipe.user.username }}</p>
+            {% else %}
+                <p>Author information unavailable.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock content %}

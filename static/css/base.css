@@ -1,0 +1,15 @@
+h1 {
+    color: #4ac1f7;
+}
+.image-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 100vh;
+}
+
+img {
+    position: relative;
+    max-width: 100%;
+    height: auto;
+}

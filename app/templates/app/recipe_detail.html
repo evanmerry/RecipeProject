@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+        <div class="post-entry">
+            <h2><a href="{% url 'recipe_detail' recipe.pk %}">{{recipe.title}}</a></h2>
+            <p>{{recipe.ingredient}}</p>
+            <p>{{recipe.instructions}}</p>
+        </div>
+        <a href="{% url 'recipe_delete' recipe.pk %}"> - Delete Recipe</a>
+{% endblock content %}

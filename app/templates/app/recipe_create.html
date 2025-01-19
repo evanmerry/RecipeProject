@@ -1,0 +1,46 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+    <h1>New Post</h1>
+    <form action="{% url 'recipe_create' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="id_title">Title:</label>
+            <input type="text" id="id_title" name="title">
+            {% for error in form.title.errors %}
+                <small style="color:red">{{error}}</small>
+            {% endfor %}
+        </div>
+        <div>
+            <label for="id_author">Author:</label>
+            <select id="id_author" name="author">
+                {% for author in authors %}
+                <option value="{{ author.pk }}" {% if author.pk == form.author.value %} selected {% endif %}>
+                    {{author.user.username}}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="id_category">Category:</label>
+            <select id="id_category" name="category">
+                {% for category in categories %}
+                <option value="{{ category.pk }}" {% if category.pk == form.category.value %} selected {% endif %}>
+                    {{category}}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="id_ingredient">Ingredients:</label>
+            <textarea type="text" id="id_ingredient" name="ingredient"></textarea>
+        </div>
+        <div>
+            <label for="id_instruction">Instruction:</label>
+            <textarea type="text" id="id_instruction" name="instruction"></textarea>
+        </div>
+
+        <input type="submit" value="Save">
+    </form>
+
+{% endblock content %}

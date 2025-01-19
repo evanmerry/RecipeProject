@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+    <h1>New Post</h1>
+    <form action="{% url 'recipe_delete' %}" method="post">
+        {% csrf_token %}
+        <p>"Are you sure you want to delete" {{recipe.title}}"?</p>
+        <input type="submit" value="Update">
+    </form>
+{% endblock content %}
