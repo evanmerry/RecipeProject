@@ -2,16 +2,55 @@
 {% load static %}
 {% block content %}
  <a href="{% url 'recipe_create' %}">+ New Recipe</a>
- <div class="nav-right">
- </div>
-    {% for recipes in recipe %}
-        <div class="post-entry">
-            <h2><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.title }}</a></h2>
-            {% if recipe.user and recipe.user.username %}
-                <p>By: {{ recipe.user.username }}</p>
-            {% else %}
-                <p>Author information unavailable.</p>
-            {% endif %}
-        </div>
-    {% endfor %}
+<br>
+<form method="get" action="{% url 'recipe' %}">
+    <label>
+        <input type="text" name="q" placeholder="search for recipe..." value="{{query}}">
+    </label>
+    <button type="button">Search</button>
+</form>
+<table>
+     <thead>
+     <tr>
+         <th>Title</th>
+         <th>Ingredients</th>
+         <th>Instructions</th>
+         <th>Category</th>
+         <th>Skill Level</th>
+         <th>Added By</th>
+         <th>View</th>
+         <th>Update</th>
+         <th>Delete</th>
+     </tr>
+     </thead>
+     <tbody>
+     {% for recipe in recipes %}
+     <tr>
+         <td>{{ recipe.title }}</td>
+         <td>{{ recipe.ingredient }}</td>
+         <td>{{ recipe.instruction }}</td>
+         <td>{{ recipe.category }}</td>
+
+         <td>
+             {% for skill_level in recipe.skill_level.all %}
+             {{skill_level.level}}
+             {% endfor %}
+         </td>
+         <td>{{ recipe.author }}</td>
+         <td><a href="{% url 'recipe_detail' recipe.pk %}">View</a></td>
+         <td><a href="{% url 'recipe_update' recipe.pk %}">Update</a></td>
+         <td><a href="{% url 'recipe_delete' recipe.pk %}">Delete</a></td>
+     </tr>
+     {% endfor %}
+     </tbody>
+     <tfoot>
+        <tr>
+            <td>Total</td>
+            <td colspan="2">{{total_recipes}}</td>
+            <td>{{total_categories}}</td>
+            <td>{{total_skill_levels}}</td>
+            <td>{{total_authors}}</td>
+        </tr>
+     </tfoot>
+ </table>
 {% endblock content %}

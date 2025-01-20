@@ -3,17 +3,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" lang="en">
-    <title>Title</title>
+    <title>Recipe App</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="shortcut icon" href="{% static 'images/E_favicon.ico' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'images/E_favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
     {% include 'app/navbar.html' %}
-    {% block content %}
-        <!-- pages -->
-    {% endblock content %}
 
-<script src="{% static 'js/base.js' %}"></script>
+    <div class="container">
+        {% if user.is_authenticated %}
+            <p>Hi {{ user.username }}!</p>
+        {% else %}
+            <p>You are not logged in.</p>
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>

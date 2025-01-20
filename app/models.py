@@ -1,10 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.urls import reverse
-
+from django.conf import settings
 
 class Author(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="author")
     bio = models.TextField(blank=True)
 
     def __str__(self):
@@ -30,7 +29,7 @@ class Recipe(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     ingredient = models.TextField()
     instruction = models.TextField()
-    skill_level = models.ManyToManyField(SkillLevel, related_name="skill_level")
+    skill_level = models.ManyToManyField(SkillLevel)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

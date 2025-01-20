@@ -13,3 +13,9 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 20px 0px 20px 0px
+}
