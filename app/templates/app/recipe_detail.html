@@ -3,9 +3,16 @@
 {% block content %}
         <div class="post-entry">
             <h2><a href="{% url 'recipe_detail' recipe.pk %}">{{recipe.title}}</a></h2>
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="recipe-image">
+            <br>
+            <h3>Ingredients</h3>
             <p>{{recipe.ingredient}}</p>
+            <br>
+            <h3>Instructions</h3>
+            <p>{{recipe.instruction}}</p>
         </div>
-        <a href="{% url 'recipe_delete' recipe.pk %}"> - Delete Recipe</a>
-        <a href="{% url 'recipe_update' recipe.pk %}"> - Edit Recipe</a>
+        <br>
+        <a href="{% url 'recipe_update' recipe.pk %}" class="btn btn-update"> Edit Recipe</a>
+        <a href="{% url 'recipe_delete' recipe.pk %}" class="btn btn-delete"> Delete Recipe</a>
 
 {% endblock content %}

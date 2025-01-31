@@ -1,17 +1,45 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block content %}
-<h1>Login</h1>
-<form method="post">
-    {% csrf_token %}
-    <div class="container">
-        <label for="username">Username</label>
-        <input type="text" placeholder="Enter your username" name="username" required>
-        <br>
-        <br>
-        <label for="password">Password</label>
-        <input type="password" placeholder="Enter your password" name="password" required>
+<div class="cover">
+    <div class="front">
+        <img src="{% static 'images/home.png' %}">
+        <div class="text">
+            <span class="text-1">Unlock a world of flavor <br> at your fingertips</span>
+            <span class="text-2">Browse recipes</span>
+        </div>
     </div>
-    <button type="submit">Log in</button>
-</form>
+</div>
+<div class="forms">
+    <div class="form-content">
+        <div class="login-form">
+            <div class="title">Login</div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-boxes">
+                    <div class="input-box">
+                        <i class="fas fa-envelope"></i>
+                        <input type="text" placeholder="Enter your username" name="username" required>
+                            {% for error in form.username.errors %}
+                                <small style="color:red">{{error}}</small>
+                            {% endfor %}
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Enter your password" name="password" required>
+                            {% for error in form.password.errors %}
+                                <small style="color:red">{{error}}</small>
+                            {% endfor %}
+                    </div>
+                    <div class="button input-box">
+                        <input type="submit" value="Login">
+                    </div>
+                    <div class="text sign-up-text">
+                        Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

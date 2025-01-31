@@ -4,7 +4,56 @@
     <h1>Edit Recipe</h1>
     <form action="{% url 'recipe_update' object.pk %}" method="post">
         {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Update">
+            <div>
+                <label for="id_title">Title: </label>
+                <input type="text" id="id_title" name="title" value="{{ object.title }}">
+                    {% for error in form.title.errors %}
+                        <small style="color:red">{{error}}</small>
+                    {% endfor %}
+            </div>
+            <div>
+                <label for="id_category">Category: </label>
+                <select id="id_category" name="category">
+                    {% for category in categories %}
+                        <option value="{{ category.pk }}" {% if object.category.pk and category.pk == object.category.pk %} selected {% endif %}>
+                            {{category}}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="id_image">Image: </label>
+                <input type="file" id="id_image" name="image">
+                    {% for error in form.image.errors %}
+                        <small style="color:red">{{error}}</small>
+                    {% endfor %}
+                    {% if object.image %}  <img src="{{ object.image.url }}" width="200">
+                    {% endif %}
+            </div>
+            <div>
+                <label for="id_ingredient">Ingredients: </label>
+                <textarea type="text" id="id_ingredient" name="ingredient">{{ object.ingredient }}</textarea>
+                    {% for error in form.ingredient.errors %}
+                        <small style="color:red">{{error}}</small>
+                    {% endfor %}
+            </div>
+            <div>
+                <label for="id_instruction">Instruction: </label>
+                <textarea type="text" id="id_instruction" name="instruction">{{ object.instruction }}</textarea>
+                    {% for error in form.instruction.errors %}
+                        <small style="color:red">{{error}}</small>
+                    {% endfor %}
+            </div>
+            <div>
+                <label for="id_skill_level">Skill Level: </label>
+                <select id="id_skill_level" name="skill_level">
+                    {% for skill_level in skill_levels %}
+                        <option value="{{ skill_level.pk }}" {% if object.skill_level.pk and skill_level.pk == object.skill_level.pk %} {% endif %}>
+                                {{skill_level}}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        <input type="submit" value="Update" class="btn btn-update">
     </form>
 {% endblock content %}

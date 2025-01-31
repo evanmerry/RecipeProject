@@ -1,10 +1,13 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="container">
-        <h1>Hello CvSU!</h1>
-        <div class="image-container">
-            <img src="{% static 'images/Cavite_State_University_(CvSU).png' %}" alt="Cavite State University">
-        </div>
+<body>
+    <div class="header">
+        <h1>Cooking Ina's Recipe</h1>
+        <br>
+        <p>Cook with confidence. Discover recipes, tips, and inspiration to make every meal amazing.</p>
+        <br>
     </div>
+    <img src="{% static 'images/home.png' %}" >
+</body>
 {% endblock content %}

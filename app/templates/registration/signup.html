@@ -1,25 +1,52 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block content %}
-<h1>Sign up</h1>
-<form method="post">
-    {% csrf_token %}
-    <div class="container">
-        <label for="username">Username</label>
-        <input type="text" placeholder="Enter your username" name="username" required>
-        <br>
-        <br>
-        <label for="age">Age</label>
-        <input type="number" placeholder="Enter your age" name="age" required>
-        <br>
-        <br>
-        <label for="password1">Password</label>
-        <input type="password" placeholder="Enter your password" name="password1" required>
-        <br>
-        <br>
-        <label for="password2">Password</label>
-        <input type="password" placeholder="Re-enter your password" name="password2" required>
+<div class="cover">
+    <div class="front">
+        <img src="{% static 'images/signup.png' %}">
+        <div class="text">
+            <span class="text-1">Discover delicious recipes <br> with every click</span>
+            <span class="text-2">Start cooking now!</span>
+        </div>
     </div>
-    <button type="submit">Sign Up</button>
-</form>
+</div>
+<div class="forms">
+    <div class="form-content">
+        <div class="signup-form">
+            <div class="title">Signup</div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-boxes">
+                    <div class="input-box">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Enter your username" name="username" required>
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Enter your email" name="email" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="number" placeholder="Enter your age" name="age" required>
+                    </div>
+                    <label>Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special symbols.</label>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Enter your password" name="password1"  title="Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special symbols." required>
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Re-enter your password" name="password2" required>
+                    </div>
+                    <div class="button input-box">
+                        <input type="submit" value="Sign Up">
+                    </div>
+                    <div class="text sign-up text">
+                        Already have an account? <a href="{% url 'login' %}">Login now</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 {% endblock content %}

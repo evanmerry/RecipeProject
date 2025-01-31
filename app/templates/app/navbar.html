@@ -1,33 +1,36 @@
+{% load static %}
 <header>
-  <div class="container">
-    <ul class="nav bg-info">
-      <li class="nav-item">
-        <a class="nav-link link-light" href="{% url 'home' %}">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link link-light" href="{% url 'about' %}">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link link-light" href="{% url 'recipe' %}">Recipe</a>
-      </li>
-      {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link link-light" href="{% url 'recipe_create' %}">Create Recipe</a>
-        </li>
+  <div class="navbar">
+    <ul>
+        <li><img src="{% static 'images/Cooking_Inas.png' %}" class="logo"></li>
         <li>
-          <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Log out</button>
-          </form>
+            {% if user.is_authenticated %}
+                <span>Hi {{ user.username }}!</span>
+            {% else %}
+                <span>You are not logged in.</span>
+            {% endif %}
         </li>
-      {% else %}
-        <li class="nav-item">
-          <a class="nav-link link-light" href="{% url 'login' %}">Login</a>
+        <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li><a class="nav-link" href="{% url 'about' %}">About</a></li>
+        <li><a class="nav-link" href="{% url 'recipe' %}">Recipe</a></li>
+        <li>
+            <form method="get" action="{% url 'recipe' %}">
+                <label>
+                    <input type="text" name="q" placeholder="search for recipe..." value="{{query}}">
+                </label>
+                <button type="submit">Search</button>
+            </form>
         </li>
-        <li class="nav-item">
-          <a class="nav-link link-light" href="{% url 'signup' %}">Sign Up</a>
-        </li>
-      {% endif %}
+        {% if user.is_authenticated %}
+            <li>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-logout">Log out</button>
+                </form>
+            </li>
+        {% else %}
+            <li><a class="active" href="{% url 'login' %}">Login</a></li>
+        {% endif %}
     </ul>
   </div>
 </header>

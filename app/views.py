@@ -18,9 +18,11 @@ class RecipeListView(ListView):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get('q', '')
         context['query'] = query
+
         if query:
             filtered_recipes = Recipe.objects.filter(title__icontains=query)
         else:
+
             filtered_recipes = Recipe.objects.all()
         context['recipes'] = filtered_recipes
 
@@ -37,7 +39,7 @@ class RecipeDetailView(DetailView):
 
 class RecipeCreateView(LoginRequiredMixin, CreateView):
     model = Recipe
-    fields = ['title', 'category', 'skill_level', 'ingredient', 'instruction', 'skill_level']
+    fields = ['title', 'image', 'category', 'skill_level', 'ingredient', 'instruction', 'skill_level']
     template_name = 'app/recipe_create.html'
 
     def get_context_data(self, **kwargs):
@@ -46,16 +48,20 @@ class RecipeCreateView(LoginRequiredMixin, CreateView):
         context['skill_levels'] = SkillLevel.objects.all()
         return context
     def form_valid(self, form):
-        user = self.request.user
-        author = user.author
+        author, created = Author.objects.get_or_create(user=self.request.user)
         form.instance.author = author
         return super().form_valid(form)
 
-
 class RecipeUpdateView(UpdateView):
     model = Recipe
-    fields = ['title', 'author', 'category', 'skill_level', 'ingredient', 'instruction', 'skill_level']
+    fields = ['title', 'image', 'category', 'skill_level', 'ingredient', 'instruction', 'skill_level']
     template_name = 'app/recipe_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['skill_levels'] = SkillLevel.objects.all()
+        return context
 
 class RecipeDeleteView(DeleteView):
     model = Recipe

@@ -5,7 +5,7 @@
     <form action="{% url 'recipe_delete' object.pk %}" method="post">
         {% csrf_token %}
         <p>"Are you sure you want to delete "{{recipe.title}}"?</p>
-        <input type="submit" value="Confirm">
+        <input type="submit" value="Confirm" class="btn btn-delete">
         <a href="{% url 'recipe' %}">Cancel</a>
     </form>
 {% endblock content %}

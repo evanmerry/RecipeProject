@@ -1,21 +1,150 @@
-h1 {
-    color: #4ac1f7;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-.image-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    height: 100vh;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  z-index: 1000;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+}
+
+li {
+  margin: 0 15px;
+}
+
+li a {
+  text-decoration: none;
+  color: white;
+  padding: 14px 20px;
+  font-size: 16px;
+}
+
+li a:hover {
+  background-color: #111;
+  border-radius: 5px;
+}
+
+body {
+  padding-top: 50px;
 }
 
 img {
-    position: relative;
     max-width: 100%;
     height: auto;
+    width: auto\9;
 }
 
-table, th, td{
-    border: 1px solid black;
+.recipe-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.recipe-card {
+    width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recipe-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.recipe-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.recipe-content {
+    padding: 15px;
+}
+
+.recipe-content h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.recipe-content p {
+    font-size: 14px;
+    color: #555;
+}
+
+.recipe-actions {
+    margin-top: 15px;
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px;
     border-collapse: collapse;
-    margin: 20px 0px 20px 0px
+}
+
+.table th, .table td {
+    padding: 10px;
+    text-align: text;
+    border: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.btn-primary {
+    background: #008631;
+    color: white;
+}
+.btn-view {
+    background: #3498db;
+    color: white;
+}
+
+.btn-update {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-delete, .btn-logout{
+    background: #e74c3c;
+    color: white;
+}
+
+.navbar .logo {
+    height: 50px;
+    width: 150%;
+    max-width: 100px;
 }

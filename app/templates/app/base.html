@@ -2,26 +2,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" lang="en">
     <title>Recipe App</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" href="{% static 'images/E_favicon.ico' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'images/E_favicon.ico' %}" type="image/x-icon">
 </head>
-<body>
+<header>
     {% include 'app/navbar.html' %}
-
+</header>
+<br>
+<br>
+<body>
     <div class="container">
-        {% if user.is_authenticated %}
-            <p>Hi {{ user.username }}!</p>
-        {% else %}
-            <p>You are not logged in.</p>
-        {% endif %}
-
         {% block content %}
         {% endblock content %}
     </div>
-
     <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>

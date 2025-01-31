@@ -27,6 +27,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=100)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(upload_to='recipe_images', default='fallback.png', blank=True)
     ingredient = models.TextField()
     instruction = models.TextField()
     skill_level = models.ManyToManyField(SkillLevel)

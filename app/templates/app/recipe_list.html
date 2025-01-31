@@ -1,56 +1,55 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block content %}
- <a href="{% url 'recipe_create' %}">+ New Recipe</a>
-<br>
-<form method="get" action="{% url 'recipe' %}">
-    <label>
-        <input type="text" name="q" placeholder="search for recipe..." value="{{query}}">
-    </label>
-    <button type="button">Search</button>
-</form>
-<table>
-     <thead>
-     <tr>
-         <th>Title</th>
-         <th>Ingredients</th>
-         <th>Instructions</th>
-         <th>Category</th>
-         <th>Skill Level</th>
-         <th>Added By</th>
-         <th>View</th>
-         <th>Update</th>
-         <th>Delete</th>
-     </tr>
-     </thead>
-     <tbody>
-     {% for recipe in recipes %}
-     <tr>
-         <td>{{ recipe.title }}</td>
-         <td>{{ recipe.ingredient }}</td>
-         <td>{{ recipe.instruction }}</td>
-         <td>{{ recipe.category }}</td>
+<a href="{% url 'recipe_create' %}" class="btn btn-primary">+ New Recipe</a>
 
-         <td>
-             {% for skill_level in recipe.skill_level.all %}
-             {{skill_level.level}}
-             {% endfor %}
-         </td>
-         <td>{{ recipe.author }}</td>
-         <td><a href="{% url 'recipe_detail' recipe.pk %}">View</a></td>
-         <td><a href="{% url 'recipe_update' recipe.pk %}">Update</a></td>
-         <td><a href="{% url 'recipe_delete' recipe.pk %}">Delete</a></td>
-     </tr>
-     {% endfor %}
-     </tbody>
-     <tfoot>
+<div class="recipe-container" >
+    {% for recipe in recipes %}
+    <div class="recipe-card">
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="recipe-image">
+        <div class="recipe-content">
+            <h3>{{ recipe.title }}</h3>
+            <p><strong>Category: </strong> {{ recipe.category }}</p>
+            <p><strong>Skill Level: </strong>
+                {% for skill_level in recipe.skill_level.all %}
+                {{skill_level.level}}
+                {% endfor %}
+            </p>
+            <p><strong>Author: </strong>{{ recipe.author }}</p>
+            <div class="recipe-actions">
+                <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-view">View</a>
+                <a href="{% url 'recipe_update' recipe.pk %}" class="btn btn-update">Update</a>
+                <a href="{% url 'recipe_delete' recipe.pk %}" class="btn btn-delete">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<table class="table table-bordered">
+    <thead>
         <tr>
-            <td>Total</td>
-            <td colspan="2">{{total_recipes}}</td>
-            <td>{{total_categories}}</td>
-            <td>{{total_skill_levels}}</td>
-            <td>{{total_authors}}</td>
+            <th>Metric</th>
+            <th>Count</th>
         </tr>
-     </tfoot>
- </table>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Total Recipes</td>
+            <td>{{ total_recipes }}</td>
+        </tr>
+        <tr>
+            <td>Total Categories</td>
+            <td>{{ total_categories }}</td>
+        </tr>
+        <tr>
+            <td>Total Skill Levels</td>
+            <td>{{ total_skill_levels }}</td>
+        </tr>
+        <tr>
+            <td>Total Authors</td>
+            <td>{{ total_authors }}</td>
+        </tr>
+    </tbody>
+</table>
 {% endblock content %}
